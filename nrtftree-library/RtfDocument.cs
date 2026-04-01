@@ -27,7 +27,6 @@
  * ******************************************************************************/
 
 using System;
-using System.Runtime.Versioning;
 using System.Text;
 using System.Drawing;
 using System.Globalization;
@@ -204,7 +203,6 @@ namespace Net.Sgoliver.NRtfTree
             /// <param name="path">Ruta de la imagen a insertar.</param>
             /// <param name="width">Ancho deseado de la imagen en el documento.</param>
             /// <param name="height">Alto deseado de la imagen en el documento.</param>
-            [SupportedOSPlatform("windows")]
             public void AddImage(string path, int width, int height)
             {
                 FileStream fStream = null;
@@ -229,7 +227,8 @@ namespace Net.Sgoliver.NRtfTree
                         hexdata.Append(GetHexa(data[i]));
                     }
 
-                    Image img = Image.FromFile(path);
+                    // Cross-platform: read image dimensions from file header (no external dependency)
+                    var imgInfo = ImageHelper.GetImageDimensions(path);
 
                     RtfTreeNode imgGroup = new RtfTreeNode(RtfNodeType.Group);
                     imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "pict", false, 0));
@@ -241,10 +240,9 @@ namespace Net.Sgoliver.NRtfTree
                         format = "jpegblip";
 
                     imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, format, false, 0));
-                    
-                    
-                    imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "picw", true, img.Width * 20));
-                    imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "pich", true, img.Height * 20));
+
+                    imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "picw", true, imgInfo.Width * 20));
+                    imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "pich", true, imgInfo.Height * 20));  // Height
                     imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "picwgoal", true, width * 20));
                     imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Keyword, "pichgoal", true, height * 20));
                     imgGroup.AppendChild(new RtfTreeNode(RtfNodeType.Text, hexdata.ToString(), false, 0));

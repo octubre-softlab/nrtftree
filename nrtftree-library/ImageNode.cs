@@ -26,12 +26,10 @@
  * Description:	Nodo RTF especializado que contiene la informaci�n de una imagen.
  * ******************************************************************************/
 
-using System.Runtime.Versioning;
 using System.Text;
 using Net.Sgoliver.NRtfTree.Core;
 using System.IO;
 using System.Globalization;
-using System.Drawing;
 
 namespace Net.Sgoliver.NRtfTree
 {
@@ -95,23 +93,22 @@ namespace Net.Sgoliver.NRtfTree
             /// <summary>
             /// Devuelve el formato original de la imagen.
             /// </summary>
-            [SupportedOSPlatform("windows")]
-            public System.Drawing.Imaging.ImageFormat ImageFormat
-            { 
-                get 
+            public RtfImageFormat ImageFormat
+            {
+                get
                 {
                     if (SelectSingleChildNode("jpegblip") != null)
-                        return System.Drawing.Imaging.ImageFormat.Jpeg;
+                        return RtfImageFormat.Jpeg;
                     else if (SelectSingleChildNode("pngblip") != null)
-                        return System.Drawing.Imaging.ImageFormat.Png;
+                        return RtfImageFormat.Png;
                     else if (SelectSingleChildNode("emfblip") != null)
-                        return System.Drawing.Imaging.ImageFormat.Emf;
+                        return RtfImageFormat.Emf;
                     else if (SelectSingleChildNode("wmetafile") != null)
-                        return System.Drawing.Imaging.ImageFormat.Wmf;
+                        return RtfImageFormat.Wmf;
                     else if (SelectSingleChildNode("dibitmap") != null || SelectSingleChildNode("wbitmap") != null)
-                        return System.Drawing.Imaging.ImageFormat.Bmp;
+                        return RtfImageFormat.Bmp;
                     else
-                        return null;
+                        return RtfImageFormat.Unknown;
                 }
             }
 
@@ -212,16 +209,11 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Devuelve la imagen en un objeto de mapa de bits.
+            /// Devuelve los datos de la imagen como un MemoryStream (cross-platform).
             /// </summary>
-            [SupportedOSPlatform("windows")]
-            public Bitmap Bitmap
+            public MemoryStream GetImageStream()
             {
-                get
-                {
-                    MemoryStream stream = new MemoryStream(GetByteData(), 0, data.Length);
-                    return new Bitmap(stream);
-                }
+                return new MemoryStream(GetByteData(), 0, data.Length, writable: false);
             }
 
             #endregion
@@ -239,46 +231,24 @@ namespace Net.Sgoliver.NRtfTree
 
             /// <summary>
             /// Guarda una imagen a fichero con el formato original.
+            /// Los bytes se escriben tal como están almacenados en el RTF (sin recodificación).
             /// </summary>
-            /// <param name="filePath">Ruta del fichero donde se guardarï¿½ la imagen.</param>
-            [SupportedOSPlatform("windows")]
+            /// <param name="filePath">Ruta del fichero donde se guardará la imagen.</param>
             public void SaveImage(string filePath)
             {
                 if (data != null)
-                {
-                    MemoryStream stream = new MemoryStream(GetByteData(), 0, data.Length);
-
-                    //Escribir a un fichero cualquier tipo de imagen
-                    Bitmap bitmap = new Bitmap(stream);
-                    bitmap.Save(filePath, ImageFormat);
-                }
+                    File.WriteAllBytes(filePath, data);
             }
 
             /// <summary>
-            /// Guarda una imagen a fichero con un formato determinado indicado como par�metro.
+            /// Guarda una imagen a fichero. Los bytes se escriben en el formato original
+            /// del RTF sin recodificación cross-platform.
             /// </summary>
-            /// <param name="filePath">Ruta del fichero donde se guardar� la imagen.</param>
-            /// <param name="format">Formato con el que se escribirï¿½ la imagen.</param>
-            [SupportedOSPlatform("windows")]
-            public void SaveImage(string filePath, System.Drawing.Imaging.ImageFormat format)
+            /// <param name="filePath">Ruta del fichero donde se guardará la imagen.</param>
+            /// <param name="format">Parámetro ignorado; se mantiene por compatibilidad de API.</param>
+            public void SaveImage(string filePath, RtfImageFormat format)
             {
-                if (data != null)
-                {
-                    MemoryStream stream = new MemoryStream(data, 0, data.Length);
-
-                    //System.Drawing.Imaging.Metafile metafile = new System.Drawing.Imaging.Metafile(stream);
-
-                    //Escribir directamente el array de bytes a un fichero ".jpg"
-                    //FileStream fs = new FileStream("c:\\prueba.jpg", FileMode.CreateNew);
-                    //BinaryWriter w = new BinaryWriter(fs);
-                    //w.Write(image,0,imageSize);
-                    //w.Close();
-                    //fs.Close();
-
-                    //Escribir a un fichero cualquier tipo de imagen
-                    Bitmap bitmap = new Bitmap(stream);
-                    bitmap.Save(filePath, format);
-                }
+                SaveImage(filePath);
             }
 
             #endregion
