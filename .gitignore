@@ -61,3 +61,7 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
+nupkg/
+
+obj/
+bin/

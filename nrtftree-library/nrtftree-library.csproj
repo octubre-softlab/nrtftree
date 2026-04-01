@@ -1,76 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7114E863-9D7D-4507-B38B-B859A0C1B836}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net5.0;net10.0</TargetFrameworks>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>nrtftree_library</RootNamespace>
     <AssemblyName>nrtftree-library</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+
+    <!-- NuGet package metadata -->
+    <PackageId>NRtfTree</PackageId>
+    <Version>0.5.0</Version>
+    <Authors>sgoliver</Authors>
+    <Description>NRtfTree is a .NET library to parse, analyze and create RTF documents. Supports net5.0 and net10.0.</Description>
+    <PackageTags>rtf;parser;document;nrtftree</PackageTags>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/sgolivernet/nrtftree</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sgolivernet/nrtftree</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\nrtftree-library.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ImageNode.cs" />
-    <Compile Include="InfoGroup.cs" />
-    <Compile Include="ObjectNode.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RtfCharFormat.cs" />
-    <Compile Include="RtfColorTable.cs" />
-    <Compile Include="RtfDocument.cs" />
-    <Compile Include="RtfDocumentFormat.cs" />
-    <Compile Include="RtfFontTable.cs" />
-    <Compile Include="RtfLex.cs" />
-    <Compile Include="RtfMerger.cs" />
-    <Compile Include="RtfNodeCollection.cs" />
-    <Compile Include="RtfNodeType.cs" />
-    <Compile Include="RtfParFormat.cs" />
-    <Compile Include="RtfPullParser.cs" />
-    <Compile Include="RtfReader.cs" />
-    <Compile Include="RtfStyleSheet.cs" />
-    <Compile Include="RtfStyleSheetTable.cs" />
-    <Compile Include="RtfStyleSheetType.cs" />
-    <Compile Include="RtfToken.cs" />
-    <Compile Include="RtfTokenType.cs" />
-    <Compile Include="RtfTree.cs" />
-    <Compile Include="RtfTreeNode.cs" />
-    <Compile Include="SarParser.cs" />
-    <Compile Include="TextAlignment.cs" />
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <ItemGroup>
+  </ItemGroup>
 </Project>
