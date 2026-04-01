@@ -23,10 +23,11 @@
  * Home Page:	http://www.sgoliver.net
  * GitHub:	    https://github.com/sgolivernet/nrtftree
  * Class:		RtfDocument
- * Description:	Clase para la generación de documentos RTF.
+ * Description:	Clase para la generaciï¿½n de documentos RTF.
  * ******************************************************************************/
 
 using System;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Drawing;
 using System.Globalization;
@@ -38,14 +39,14 @@ namespace Net.Sgoliver.NRtfTree
     namespace Util
     {
         /// <summary>
-        /// Clase para la generación de documentos RTF.
+        /// Clase para la generaciï¿½n de documentos RTF.
         /// </summary>
         public class RtfDocument
         {
             #region Atributos privados
 
             /// <summary>
-            /// Codificación del documento.
+            /// Codificaciï¿½n del documento.
             /// </summary>
             private Encoding encoding;
 
@@ -70,7 +71,7 @@ namespace Net.Sgoliver.NRtfTree
             private RtfCharFormat currentFormat;
 
             /// <summary>
-            /// Formato actual de párrafo.
+            /// Formato actual de pï¿½rrafo.
             /// </summary>
             private RtfParFormat currentParFormat;
 
@@ -86,7 +87,7 @@ namespace Net.Sgoliver.NRtfTree
             /// <summary>
             /// Constructor de la clase RtfDocument.
             /// </summary>
-            /// <param name="enc">Codificación del documento a generar.</param>
+            /// <param name="enc">Codificaciï¿½n del documento a generar.</param>
             public RtfDocument(Encoding enc)
             {
                 encoding = enc;
@@ -107,7 +108,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Constructor de la clase RtfDocument. Se utilizará la codificación por defecto del sistema.
+            /// Constructor de la clase RtfDocument. Se utilizarï¿½ la codificaciï¿½n por defecto del sistema.
             /// </summary>
             public RtfDocument() : this(Encoding.Default)
             {
@@ -152,9 +153,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inserta un número determinado de saltos de línea en el documento.
+            /// Inserta un nï¿½mero determinado de saltos de lï¿½nea en el documento.
             /// </summary>
-            /// <param name="n">Número de saltos de línea a insertar.</param>
+            /// <param name="n">Nï¿½mero de saltos de lï¿½nea a insertar.</param>
             public void AddNewLine(int n)
             {
                 for(int i=0; i<n; i++)
@@ -162,7 +163,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inserta un salto de línea en el documento.
+            /// Inserta un salto de lï¿½nea en el documento.
             /// </summary>
             public void AddNewLine()
             {
@@ -170,7 +171,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inicia un nuevo párrafo.
+            /// Inicia un nuevo pï¿½rrafo.
             /// </summary>
             public void AddNewParagraph()
             {
@@ -178,9 +179,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inserta un número determinado de saltos de párrafo en el documento.
+            /// Inserta un nï¿½mero determinado de saltos de pï¿½rrafo en el documento.
             /// </summary>
-            /// <param name="n">Número de saltos de párrafo a insertar.</param>
+            /// <param name="n">Nï¿½mero de saltos de pï¿½rrafo a insertar.</param>
             public void AddNewParagraph(int n)
             {
                 for (int i = 0; i < n; i++)
@@ -188,7 +189,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inicia un nuevo párrafo con el formato especificado.
+            /// Inicia un nuevo pï¿½rrafo con el formato especificado.
             /// </summary>
             public void AddNewParagraph(RtfParFormat format)
             {
@@ -203,6 +204,7 @@ namespace Net.Sgoliver.NRtfTree
             /// <param name="path">Ruta de la imagen a insertar.</param>
             /// <param name="width">Ancho deseado de la imagen en el documento.</param>
             /// <param name="height">Alto deseado de la imagen en el documento.</param>
+            [SupportedOSPlatform("windows")]
             public void AddImage(string path, int width, int height)
             {
                 FileStream fStream = null;
@@ -265,7 +267,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Establece el formato de párrafo por defecto.
+            /// Establece el formato de pï¿½rrafo por defecto.
             /// </summary>
             public void ResetParFormat()
             {
@@ -273,7 +275,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Establece el formato de caracter y párrafo por defecto.
+            /// Establece el formato de caracter y pï¿½rrafo por defecto.
             /// </summary>
             public void ResetFormat()
             {
@@ -294,7 +296,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Actualiza los valores de las propiedades de formato de texto y párrafo.
+            /// Actualiza los valores de las propiedades de formato de texto y pï¿½rrafo.
             /// </summary>
             /// <param name="format">Formato de texto a insertar.</param>
             public void UpdateCharFormat(RtfCharFormat format)
@@ -351,9 +353,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Establece el formato de párrafo pasado como parámetro.
+            /// Establece el formato de pï¿½rrafo pasado como parï¿½metro.
             /// </summary>
-            /// <param name="format">Formato de párrafo a utilizar.</param>
+            /// <param name="format">Formato de pï¿½rrafo a utilizar.</param>
             public void UpdateParFormat(RtfParFormat format)
             {
                 SetAlignment(format.Alignment);
@@ -362,9 +364,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Estable la alineación del texto dentro del párrafo.
+            /// Estable la alineaciï¿½n del texto dentro del pï¿½rrafo.
             /// </summary>
-            /// <param name="align">Tipo de alineación.</param>
+            /// <param name="align">Tipo de alineaciï¿½n.</param>
             public void SetAlignment(TextAlignment align)
             {
                 if (currentParFormat.Alignment != align)
@@ -393,9 +395,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Establece la sangría izquierda del párrafo.
+            /// Establece la sangrï¿½a izquierda del pï¿½rrafo.
             /// </summary>
-            /// <param name="val">Sangría izquierda en centímetros.</param>
+            /// <param name="val">Sangrï¿½a izquierda en centï¿½metros.</param>
             public void SetLeftIndentation(float val)
             {
                 if (currentParFormat.LeftIndentation != val)
@@ -406,9 +408,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Establece la sangría derecha del párrafo.
+            /// Establece la sangrï¿½a derecha del pï¿½rrafo.
             /// </summary>
-            /// <param name="val">Sangría derecha en centímetros.</param>
+            /// <param name="val">Sangrï¿½a derecha en centï¿½metros.</param>
             public void SetRightIndentation(float val)
             {
                 if (currentParFormat.RightIndentation != val)
@@ -479,9 +481,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Establece el tamaño de fuente actual.
+            /// Establece el tamaï¿½o de fuente actual.
             /// </summary>
-            /// <param name="val">Tamaño de la fuente.</param>
+            /// <param name="val">Tamaï¿½o de la fuente.</param>
             public void SetFormatSize(int val)
             {
                 if (currentFormat.Size != val)
@@ -529,7 +531,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Obtiene el código RTF del documento RTF
+            /// Obtiene el cï¿½digo RTF del documento RTF
             /// </summary>
             public string Rtf
             {
@@ -540,7 +542,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Obtiene el árbol RTF del documento actual
+            /// Obtiene el ï¿½rbol RTF del documento actual
             /// </summary>
             public RtfTree Tree
             {
@@ -555,8 +557,8 @@ namespace Net.Sgoliver.NRtfTree
             #region Metodos Privados
 
             /// <summary>
-            /// Obtiene el árbol RTF equivalente al documento actual.
-            /// <returns>Árbol RTF equivalente al documento en el estado actual.</returns>
+            /// Obtiene el ï¿½rbol RTF equivalente al documento actual.
+            /// <returns>ï¿½rbol RTF equivalente al documento en el estado actual.</returns>
             /// </summary>
             private RtfTree GetTree()
             {
@@ -574,10 +576,10 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Obtiene el código hexadecimal de un entero.
+            /// Obtiene el cï¿½digo hexadecimal de un entero.
             /// </summary>
-            /// <param name="code">Número entero.</param>
-            /// <returns>Código hexadecimal del entero pasado como parámetro.</returns>
+            /// <param name="code">Nï¿½mero entero.</param>
+            /// <returns>Cï¿½digo hexadecimal del entero pasado como parï¿½metro.</returns>
             private string GetHexa(byte code)
             {
                 string hexa = Convert.ToString(code, 16);
@@ -591,7 +593,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inserta el código RTF de la tabla de fuentes en el documento.
+            /// Inserta el cï¿½digo RTF de la tabla de fuentes en el documento.
             /// </summary>
             private void InsertFontTable(RtfTree tree)
             {
@@ -613,7 +615,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inserta el código RTF de la tabla de colores en el documento.
+            /// Inserta el cï¿½digo RTF de la tabla de colores en el documento.
             /// </summary>
             private void InsertColorTable(RtfTree tree)
             {
@@ -633,7 +635,7 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Inserta el código RTF de la aplicación generadora del documento.
+            /// Inserta el cï¿½digo RTF de la aplicaciï¿½n generadora del documento.
             /// </summary>
             private void InsertGenerator(RtfTree tree)
             {
@@ -764,9 +766,9 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Convierte entre centímetros y twips.
+            /// Convierte entre centï¿½metros y twips.
             /// </summary>
-            /// <param name="centimeters">Valor en centímetros.</param>
+            /// <param name="centimeters">Valor en centï¿½metros.</param>
             /// <returns>Valor en twips.</returns>
             private int calcTwips(float centimeters)
             {

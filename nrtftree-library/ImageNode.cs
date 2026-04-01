@@ -23,9 +23,10 @@
  * Home Page:	http://www.sgoliver.net
  * GitHub:	    https://github.com/sgolivernet/nrtftree
  * Class:		ImageNode
- * Description:	Nodo RTF especializado que contiene la información de una imagen.
+ * Description:	Nodo RTF especializado que contiene la informaciï¿½n de una imagen.
  * ******************************************************************************/
 
+using System.Runtime.Versioning;
 using System.Text;
 using Net.Sgoliver.NRtfTree.Core;
 using System.IO;
@@ -44,7 +45,7 @@ namespace Net.Sgoliver.NRtfTree
             #region Atributos privados
 
             /// <summary>
-            /// Array de bytes con la información de la imagen.
+            /// Array de bytes con la informaciï¿½n de la imagen.
             /// </summary>
             private byte[] data;
 
@@ -55,7 +56,7 @@ namespace Net.Sgoliver.NRtfTree
             /// <summary>
             /// Constructor de la clase ImageNode.
             /// </summary>
-            /// <param name="node">Nodo RTF del que se obtendrán los datos de la imagen.</param>
+            /// <param name="node">Nodo RTF del que se obtendrï¿½n los datos de la imagen.</param>
             public ImageNode(RtfTreeNode node)
             {
 				if(node != null)
@@ -94,6 +95,7 @@ namespace Net.Sgoliver.NRtfTree
             /// <summary>
             /// Devuelve el formato original de la imagen.
             /// </summary>
+            [SupportedOSPlatform("windows")]
             public System.Drawing.Imaging.ImageFormat ImageFormat
             { 
                 get 
@@ -212,6 +214,7 @@ namespace Net.Sgoliver.NRtfTree
             /// <summary>
             /// Devuelve la imagen en un objeto de mapa de bits.
             /// </summary>
+            [SupportedOSPlatform("windows")]
             public Bitmap Bitmap
             {
                 get
@@ -237,7 +240,8 @@ namespace Net.Sgoliver.NRtfTree
             /// <summary>
             /// Guarda una imagen a fichero con el formato original.
             /// </summary>
-            /// <param name="filePath">Ruta del fichero donde se guardará la imagen.</param>
+            /// <param name="filePath">Ruta del fichero donde se guardarÃ¯Â¿Â½ la imagen.</param>
+            [SupportedOSPlatform("windows")]
             public void SaveImage(string filePath)
             {
                 if (data != null)
@@ -251,10 +255,11 @@ namespace Net.Sgoliver.NRtfTree
             }
 
             /// <summary>
-            /// Guarda una imagen a fichero con un formato determinado indicado como parámetro.
+            /// Guarda una imagen a fichero con un formato determinado indicado como parï¿½metro.
             /// </summary>
-            /// <param name="filePath">Ruta del fichero donde se guardará la imagen.</param>
-            /// <param name="format">Formato con el que se escribirá la imagen.</param>
+            /// <param name="filePath">Ruta del fichero donde se guardarï¿½ la imagen.</param>
+            /// <param name="format">Formato con el que se escribirÃ¯Â¿Â½ la imagen.</param>
+            [SupportedOSPlatform("windows")]
             public void SaveImage(string filePath, System.Drawing.Imaging.ImageFormat format)
             {
                 if (data != null)
@@ -281,7 +286,7 @@ namespace Net.Sgoliver.NRtfTree
             #region Metodos privados
 
             /// <summary>
-            /// Obtiene los datos de la imagen a partir de la información contenida en el nodo RTF.
+            /// Obtiene los datos de la imagen a partir de la informaciï¿½n contenida en el nodo RTF.
             /// </summary>
             private void getImageData()
             {
